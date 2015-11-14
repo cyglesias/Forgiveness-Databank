@@ -2,6 +2,7 @@ var levelup = require('levelup');
 var express = require('express');
 var app = express();
 var server = app.listen(3000);
+console.log("server running http://localhost:300");
 app.use(express.static('public'));
 
 var io = require('socket.io')(server);
@@ -17,7 +18,7 @@ app.get('/', function(req, res) {
 
 io.on('connection', function(socket) {
             socket.on('message', function(msg) {
-                // console.log(msg);
+                console.log(msg);
                 i = i + 1;
 
                 db.put(i, msg, function(err) {
