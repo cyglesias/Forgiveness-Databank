@@ -1,0 +1,25 @@
+{
+  "name": "Forgiveness-Databank",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cyglesias/Forgiveness-Databank.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cyglesias/Forgiveness-Databank/issues"
+  },
+  "homepage": "https://github.com/cyglesias/Forgiveness-Databank",
+  "dependencies": {
+    "express": "^4.13.3",
+    "level": "^1.3.0",
+    "levelup": "^1.3.0",
+    "socket.io": "^1.3.7"
+  }
+}
