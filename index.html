@@ -1,0 +1,33 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="styles/styles.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+	<title>THE FORGIVENESS DATABANK</title>
+</head>
+<body>
+	
+<div align="center">
+	<h1> The Forgiveness Databank </h1>
+	<form><input type="text" id="message" name="apology_form"> <br>
+	<!-- <input type="submit" class="btn btn-danger" value="Submit" id="send"> -->
+<div>
+<h1 id="send">Submit for forgiveness</h1>
+<h1 id="recieve"></h1>
+</div>
+</form> </div>
+	
+	<h1 id="incoming"> </h1>
+	<script type="text/javascript">
+	var msg = $("#message").val();
+	$("#send").click(function() {
+        var a = $("#message").val();
+        // This line is where the instructions can go after clicking the button
+		$("#recieve").text(a);
+		
+	});
+	</script>
+
+</body>
+</html>

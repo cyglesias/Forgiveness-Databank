@@ -1,0 +1,26 @@
+div {
+	height: 1000px;
+	width: 1000px;
+	margin: auto;
+}
+
+input {
+  width: 1000px;
+  height: 1000px;
+}
+body {
+    background-color: #000;
+}
+
+h1 {
+	color:FFF;
+	font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
+	font-size: 50px;
+	font-weight: 500;
+	line-height: 26.4px;
+	text-transform: uppercase;
+}
+
+body {
+	margin: 50;
+}
