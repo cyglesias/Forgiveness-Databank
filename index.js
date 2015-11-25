@@ -2,7 +2,7 @@ var levelup = require('levelup');
 var express = require('express');
 var app = express();
 var server = app.listen(3000);
-console.log("server running http://localhost:300");
+console.log("server running http://localhost:3000");
 app.use(express.static('public'));
 
 var io = require('socket.io')(server);

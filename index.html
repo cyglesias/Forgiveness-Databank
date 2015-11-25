@@ -1,0 +1,86 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="styles/styles.css">
+	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<title>THE FORGIVENESS DATABANK</title>
+</head>
+
+<body>
+		<h1> THE FORGIVENESS DATABANK</h1>
+	
+<div class="wrapper">
+<div class="commentBoxfloat">
+  <form id="cmnt">
+    <fieldset>
+      <div class="form_grp">
+        <label>say sorry here</label>
+        <textarea id="message" placeholder="..."></textarea>        
+      </div>
+      <div class="form_grp">
+      <button type="button" id="send">submit apology</button>
+      
+      </div>
+    </fieldset>
+  </form>  
+</div>
+<h1 id="receive"></h1>
+  
+  <div id="cmntContr"></div>
+  
+  
+
+
+</div>
+</form> </div>
+	
+	<h1 id="incoming"> </h1>
+	
+<!-- once submit for forgiven button is pressed, server sends back message from ideas array -->
+	<script type="text/javascript">
+	var ideas = [];
+	var socket = io();
+
+	var msg = $("#message").val();
+	socket.on('data', function(data) {
+        console.log(data);
+        ideas.push(data.val);
+        var rand = ideas[Math.floor(Math.random() * ideas.length)];
+         // if message received matches message sent, find another message to receive 
+        //  while(data.val==rand) {
+        //  	rand = ideas[Math.floor(Math.random() * ideas.length)];
+        //  }
+
+        // $('#receive').text(rand);
+        
+
+    }); 
+
+	$("#send").click(function() {
+        var a = $("#message").val();
+        socket.emit('message',a);
+        console.log(a);
+
+        // This line is where the instructions can go after clicking the button	
+	});
+
+	</script>
+
+  <script>
+
+// when you click submit button, the .wrapper is hidden, hiding the text box and other elements within wrapper
+$(document).ready(function(){
+    $("#send").click(function(){
+        $(".wrapper").hide();
+    });
+
+//when you click submit button, show this element (need to create new elements and give them ID)
+    // $("#send").click(function(){
+    //     $("p").show();
+    // });
+});
+</script>
+
+</body>
+</html>
