@@ -12,14 +12,14 @@
 	
 <div class="wrapper">
 <div class="commentBoxfloat">
-  <form id="cmnt">
+  <form id="apologyform">
     <fieldset>
       <div class="form_grp">
         <label>say sorry here</label>
-        <textarea id="message" placeholder="..."></textarea>        
+        <textarea id="message" placeholder="..." required></textarea>        
       </div>
       <div class="form_grp">
-      <button type="button" id="send">submit apology</button>
+      <input type="submit" id="send">submit apology</input>
       
       </div>
     </fieldset>
@@ -39,14 +39,14 @@
 	
 <!-- once submit for forgiven button is pressed, server sends back message from ideas array -->
 	<script type="text/javascript">
-	var ideas = [];
-	var socket = io();
+	// var ideas = [];
+	
 
-	var msg = $("#message").val();
-	socket.on('data', function(data) {
-        console.log(data);
-        ideas.push(data.val);
-        var rand = ideas[Math.floor(Math.random() * ideas.length)];
+	// var msg = $("#message").val();
+	// socket.on('data', function(data) {
+ //        console.log(data);
+ //        ideas.push(data.val);
+ //        var rand = ideas[Math.floor(Math.random() * ideas.length)];
          // if message received matches message sent, find another message to receive 
         //  while(data.val==rand) {
         //  	rand = ideas[Math.floor(Math.random() * ideas.length)];
@@ -55,24 +55,45 @@
         // $('#receive').text(rand);
         
 
-    }); 
+    // }); 
 
-	$("#send").click(function() {
-        var a = $("#message").val();
-        socket.emit('message',a);
-        console.log(a);
+	// $("#send").click(function() {
+ //        var a = $("#message").val();
+ //        socket.emit('message',a);
+ //        console.log(a);
 
         // This line is where the instructions can go after clicking the button	
-	});
+	// });
 
-	</script>
+</script>	
 
-  <script>
+<script>
 
-// when you click submit button, the .wrapper is hidden, hiding the text box and other elements within wrapper
+
+
+// This functions says what to do when the apologyform is submitted
+ //  prevent default makes sure the page doesn't refresh automatically after submitting
+ // the text is assigned to the variable apologytext
+
+ //  when you click submit button, the .wrapper is hidden, hiding the text box and other elements within wrapper
 $(document).ready(function(){
-    $("#send").click(function(){
+    var socket = io();
+    $("#apologyform").submit(function(e){
+      e.preventDefault() 
+      var apologytext;
+      apologytext = $("#message").val()
+      console.log (apologytext);
+      socket.emit("apology", apologytext);
+      
+
+
+
+
+
+
+
         $(".wrapper").hide();
+
     });
 
 //when you click submit button, show this element (need to create new elements and give them ID)
