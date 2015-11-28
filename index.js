@@ -63,6 +63,11 @@ io.on('connection', function(socket) {
             socket.on('apology', function(apologytext) {
                 console.log(apologytext);
                 my_sheet.addRow(1, { apology: apologytext} );
+        
+     // this.getCells = function (opts, cb) {
+  //   spreadsheet.getCells( self.id, opts, cb );
+  // }
+    });
                
 
                 // db.put(i, msg, function(err) {

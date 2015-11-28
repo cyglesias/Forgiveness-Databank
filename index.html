@@ -9,6 +9,8 @@
 
 <body>
 		<h1> THE FORGIVENESS DATABANK</h1>
+
+<!-- APOLOGY FORM/PART 1 -->
 	
 <div class="wrapper">
 <div class="commentBoxfloat">
@@ -25,47 +27,37 @@
     </fieldset>
   </form>  
 </div>
-<h1 id="receive"></h1>
+
+<!-- FORGIVENESS FORM/PART 2 -->
+
+<div class="wrapper2">
+<div class="commentBoxfloat">
+  <form id="forgivenessform">
+    <fieldset>
+      <div class="form_grp">
+        <label>give forgiveness here</label>
+        <textarea id="message2" placeholder="..." required></textarea>        
+      </div>
+      <div class="form_grp">
+      <input type="submit" id="send">submit forgiveness</input>
+      
+      </div>
+    </fieldset>
+  </form>  
+</div>
+
+
+<!-- <h1 id="receive"></h1>
   
   <div id="cmntContr"></div>
-  
-  
-
-
-</div>
+  </div>
 </form> </div>
-	
-	<h1 id="incoming"> </h1>
+ -->	
+	<!-- <h1 id="incoming"> </h1> -->
 	
 <!-- once submit for forgiven button is pressed, server sends back message from ideas array -->
-	<script type="text/javascript">
-	// var ideas = [];
-	
+	 
 
-	// var msg = $("#message").val();
-	// socket.on('data', function(data) {
- //        console.log(data);
- //        ideas.push(data.val);
- //        var rand = ideas[Math.floor(Math.random() * ideas.length)];
-         // if message received matches message sent, find another message to receive 
-        //  while(data.val==rand) {
-        //  	rand = ideas[Math.floor(Math.random() * ideas.length)];
-        //  }
-
-        // $('#receive').text(rand);
-        
-
-    // }); 
-
-	// $("#send").click(function() {
- //        var a = $("#message").val();
- //        socket.emit('message',a);
- //        console.log(a);
-
-        // This line is where the instructions can go after clicking the button	
-	// });
-
-</script>	
 
 <script>
 
@@ -77,6 +69,7 @@
 
  //  when you click submit button, the .wrapper is hidden, hiding the text box and other elements within wrapper
 $(document).ready(function(){
+  $(".wrapper2").hide();
     var socket = io();
     $("#apologyform").submit(function(e){
       e.preventDefault() 
@@ -84,23 +77,23 @@ $(document).ready(function(){
       apologytext = $("#message").val()
       console.log (apologytext);
       socket.emit("apology", apologytext);
+       
+      $(".wrapper").hide();
+      $(".wrapper2").show();
+       
+    });
+     
+
       
 
-
-
-
-
-
-
-        $(".wrapper").hide();
+       
 
     });
 
-//when you click submit button, show this element (need to create new elements and give them ID)
-    // $("#send").click(function(){
-    //     $("p").show();
-    // });
-});
+
+    
+
+
 </script>
 
 </body>
