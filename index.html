@@ -21,7 +21,7 @@
         <textarea id="message" placeholder="..." required></textarea>        
       </div>
       <div class="form_grp">
-      <input type="submit" id="send">submit apology</input>
+      <input type="submit" id="send"></input>
       
       </div>
     </fieldset>
@@ -40,13 +40,14 @@
         <textarea id="message2" placeholder="..." required></textarea>        
       </div>
       <div class="form_grp">
-      <input type="submit" id="send">submit forgiveness</input>
+      <input type="submit" id="send"></input>
       
       </div>
     </fieldset>
   </form>  
 </div>
 </div>
+
 
 
 <!-- <h1 id="receive"></h1>
@@ -79,16 +80,20 @@ $(document).ready(function(){
       apologytext = $("#message").val()
       console.log (apologytext);
       socket.emit("apology", apologytext);
+
+      var forgivenesstext;
+      forgivenesstext = $("#message2").val()
+      console.log (forgivenesstext);
+      socket.emit("forgiveness", forgivenesstext);
+
+    
        
       $(".wrapper").hide();
       $(".wrapper2").show();
-       
-    });
-     
 
-      
 
        
+    });  
 
     });
 
