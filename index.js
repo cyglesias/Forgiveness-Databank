@@ -59,20 +59,91 @@ app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
-io.on('connection', function(socket) {
-            socket.on('apology', function(apologytext) {
-                console.log(apologytext);
-                my_sheet.addRow(1, { apology: apologytext} );
+function finduncompletedrow (cb) {
+    my_sheet.getRows( 1, {
+        // start: 100,          // start index
+        // num: 100,              // number of rows to pull
+        // orderby: 'name'  // column to order results by
+   
+
+        
+    }, function(err, row_data){
+        var a;
+        var f;
+        console.log (err);
+        console.log(row_data);
+        for (var i = row_data.length - 1; i >= 0; i--) {
+            
+             a = row_data[i].apology;
+             f = row_data[i].forgiveness;
+             // console.log (a, f);
+             if (f == '') {
+                console.log (a);
+                cb(a);
+                return;
+             }
+        };
+        // do something...
+    });
+
+}
+
+function completerow (apologytext, forgivenesstext) {
+    my_sheet.getRows( 1, {
+        // start: 100,          // start index
+        // num: 100,              // number of rows to pull
+        // orderby: 'name'  // column to order results by
+   
+
+        
+    }, function(err, row_data){
+        var a;
+        var f;
+        console.log (err);
+        console.log(row_data);
+        for (var i = row_data.length - 1; i >= 0; i--) {
+            
+             a = row_data[i].apology;
+             f = row_data[i].forgiveness;
+             // console.log (a, f);
+             if (a == apologytext) {
+                row_data[i].forgiveness= forgivenesstext;
+                row_data[i].save();
+                console.log (a);
+                return;
+             }
+        };
+        // do something...
+    });
+
+}
 
 io.on('connection', function(socket) {
-                 socket.on('forgiveness', function(forgivenesstext) {
-                console.log(forgivenesstext);
-                my_sheet.addRow(1, { forgiveness: forgivenesstext} );
+    socket.on('apology', function(apologytext) {
+        console.log(apologytext);
+        finduncompletedrow (function(a){
+            socket.emit ("apologyprompt", a) 
+            my_sheet.addRow(1, { apology: apologytext} );
+        });
+
+        
+
+        
+
+    });
+
+    socket.on('forgiveness', function(forgivenesstext) {
+        console.log(forgivenesstext);
+        my_sheet.addRow(1, { forgiveness: forgivenesstext} );
+    });
+
+
         
      // this.getCells = function (opts, cb) {
   //   spreadsheet.getCells( self.id, opts, cb );
   // }
-    });
+    // });
+    //               });
                
 
                 // db.put(i, msg, function(err) {
@@ -87,7 +158,7 @@ io.on('connection', function(socket) {
                 //     });
                     
                 // })
-});
+
 
 
 

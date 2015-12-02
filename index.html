@@ -37,6 +37,7 @@
     <fieldset>
       <div class="form_grp">
         <label>give forgiveness here</label>
+        <div id="apologyprompt"> </div>
         <textarea id="message2" placeholder="..." required></textarea>        
       </div>
       <div class="form_grp">
@@ -74,6 +75,12 @@
 $(document).ready(function(){
   $(".wrapper2").hide();
     var socket = io();
+    socket.on ("apologyprompt", function (a){
+      console.log (a);
+      $("#apologyprompt").append(a);
+
+    });
+
     $("#apologyform").submit(function(e){
       e.preventDefault() 
       var apologytext;
