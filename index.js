@@ -22,6 +22,7 @@ my_sheet.useServiceAccountAuth(config, function(err){
     else {
         console.log("logged into google")
     }
+    });
 
     // getInfo returns info about the sheet and an array or "worksheet" objects
     // my_sheet.getInfo( function( err, sheet_info ){
@@ -53,10 +54,14 @@ my_sheet.useServiceAccountAuth(config, function(err){
     //}, function(err, row_data){
         //// do something...
     //});
-});
+
 
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');
+});
+
+app.get('/display', function(req, res) {
+    res.sendFile(__dirname + '/display.html');
 });
 
 function finduncompletedrow (cb) {
@@ -64,10 +69,8 @@ function finduncompletedrow (cb) {
         // start: 100,          // start index
         // num: 100,              // number of rows to pull
         // orderby: 'name'  // column to order results by
-   
-
-        
-    }, function(err, row_data){
+     },
+     function(err, row_data){
         var a;
         var f;
         console.log (err);
@@ -113,32 +116,33 @@ function completerow (apologytext, forgivenesstext) {
                 return;
              }
         };
-        // do something...
+        
     });
 
 }
 
 io.on('connection', function(socket) {
+//listens for apology and adds to new row in spreadsheet
     socket.on('apology', function(apologytext) {
         console.log(apologytext);
+        // looks for apology without forgiveness, finds it, sends it to the browser (called apologyprompt)
         finduncompletedrow (function(a){
             socket.emit ("apologyprompt", a) 
             my_sheet.addRow(1, { apology: apologytext} );
-        });
 
-        
-
-        
+        }); 
 
     });
 
-    socket.on('forgiveness', function(forgivenesstext) {
-        console.log(forgivenesstext);
-        my_sheet.addRow(1, { forgiveness: forgivenesstext} );
+
+    socket.on('forgiveness', function(forgivenesstext, apologytext) {
+        console.log(forgivenesstext, apologytext);
+        completerow (apologytext, forgivenesstext);
+
     });
 
 
-        
+});        
      // this.getCells = function (opts, cb) {
   //   spreadsheet.getCells( self.id, opts, cb );
   // }

@@ -74,33 +74,49 @@
  //  when you click submit button, the .wrapper is hidden, hiding the text box and other elements within wrapper
 $(document).ready(function(){
   $(".wrapper2").hide();
-    var socket = io();
+  var socket = io();
+  var apologyprompt;
+
+// listening for apologyprompt (the apology the user has to forgive in part 2) message, and displaying it when it gets it
     socket.on ("apologyprompt", function (a){
+      apologyprompt = a;
       console.log (a);
       $("#apologyprompt").append(a);
 
     });
-
+// when the user clicks submit after writing an apology, preventdefault prevents the page from refreshing
     $("#apologyform").submit(function(e){
       e.preventDefault() 
+// defining variable to grab text in form with ID #message
       var apologytext;
       apologytext = $("#message").val()
       console.log (apologytext);
+//sends apologytext to server, adds text to spreadsheet apology column, creating new row 
       socket.emit("apology", apologytext);
 
-      var forgivenesstext;
-      forgivenesstext = $("#message2").val()
-      console.log (forgivenesstext);
-      socket.emit("forgiveness", forgivenesstext);
-
-    
-       
       $(".wrapper").hide();
       $(".wrapper2").show();
 
 
+       }); 
+
+// when the user clicks submit on the second form, entering in their letter of forgiveness
+$("#forgivenessform").submit(function(e){
+      e.preventDefault() 
+
+// defining variable to grab text in forgiveness form with ID #message2
+      var forgivenesstext;
+      forgivenesstext = $("#message2").val()
+      console.log (forgivenesstext);
+      //sends forgiveness letter to server, adding it to its answered apology row
+      socket.emit("forgiveness", forgivenesstext, apologyprompt);
+
+    
        
-    });  
+    
+});
+       
+   
 
     });
 
