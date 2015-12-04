@@ -3,7 +3,6 @@
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
 	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <title>THE FORGIVENESS DATABANK</title>
 </head>
 
@@ -110,6 +109,7 @@ $("#forgivenessform").submit(function(e){
       console.log (forgivenesstext);
       //sends forgiveness letter to server, adding it to its answered apology row
       socket.emit("forgiveness", forgivenesstext, apologyprompt);
+      location.reload();
 
     
        

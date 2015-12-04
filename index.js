@@ -15,45 +15,44 @@ var config = require("./config.js");
 // create the reference to our spreadsheet
 var my_sheet = new GoogleSpreadsheet(config.SPREADSHEET_ID);
 
+var displayrow = null;
+
 my_sheet.useServiceAccountAuth(config, function(err){
     if (err) {
       throw err;
     }
     else {
         console.log("logged into google")
-    }
-    });
+        my_sheet.getRows ( 1, {
+        },
+        function(err, row_data){
+            var a;
+            var f;
+            for (var i = row_data.length - 1; i >= 0; i--) {
+                
+                 a = row_data[i].apology;
+                 f = row_data[i].forgiveness;
+                 // console.log (a, f);
+                 if (a != '' && f!='') {
+                    displayrow = {
+                        "apology": a,
+                        "forgiveness": f
+                    };
+                    console.log (displayrow);
+                    return;
+                 }
+            };
 
-    // getInfo returns info about the sheet and an array or "worksheet" objects
-    // my_sheet.getInfo( function( err, sheet_info ){
-    //     if (err) {
-    //       throw err;
-    //     }
-    //     console.log( sheet_info.title + ' is loaded' );
-    //     // use worksheet object if you want to stop using the # in your calls
 
-    //     var sheet1 = sheet_info.worksheets[0];
-    //     sheet1.getRows( function( err, rows ){
-    //       console.log("rows");
-    //       console.log(rows);
-    //         //rows[0].forgivness = 'new val';
-    //         //rows[0].save(); //async and takes a callback
 
-    //         //rows[0].del();  //async and takes a callback
-    //     });
-    // });
 
-    // column names are set by google and are based
-  // on the header row (first row) of your sheet
-    
+       
+        
+        // do something...
+        });
+        }
+});
 
-    //my_sheet.getRows( 2, {
-        //start: 100,          // start index
-        //num: 100,              // number of rows to pull
-        //orderby: 'name'  // column to order results by
-    //}, function(err, row_data){
-        //// do something...
-    //});
 
 
 app.get('/', function(req, res) {
@@ -63,6 +62,8 @@ app.get('/', function(req, res) {
 app.get('/display', function(req, res) {
     res.sendFile(__dirname + '/display.html');
 });
+
+
 
 function finduncompletedrow (cb) {
     my_sheet.getRows( 1, {
@@ -113,6 +114,9 @@ function completerow (apologytext, forgivenesstext) {
                 row_data[i].forgiveness= forgivenesstext;
                 row_data[i].save();
                 console.log (a);
+                displayrow.apology = a;
+                displayrow.forgiveness = row_data[i].forgiveness;
+                io.emit ("displayrow", displayrow);
                 return;
              }
         };
@@ -141,8 +145,12 @@ io.on('connection', function(socket) {
 
     });
 
+socket.emit("displayrow", displayrow);
+
 
 });        
+
+
      // this.getCells = function (opts, cb) {
   //   spreadsheet.getCells( self.id, opts, cb );
   // }
