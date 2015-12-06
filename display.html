@@ -7,8 +7,9 @@
 	<title></title>
 </head>
 <body>
-	<h1> The Forgiveness Databank <span class="blinker"></span></h1>
-	<hr>
+	<h1 id= "display"> The Forgiveness Databank </h1>
+	
+	<span class="blinker"></span>
 
 	<div id="text">
 	loading
@@ -20,9 +21,11 @@ $(document).ready(function(){
   socket.on("displayrow", function(displayrow){
   	console.log(displayrow)
   	if (window.location.hash == "#apology") {
+  		
 	$("#text").html(displayrow.apology); 
   	}
 else if (window.location.hash =="#forgiveness") {
+	h
 	$("#text").html(displayrow.forgiveness); 
 }
   })
