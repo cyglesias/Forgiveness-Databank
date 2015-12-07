@@ -7,13 +7,13 @@
 	<title></title>
 </head>
 <body>
-	<h1 id= "display"> The Forgiveness Databank </h1>
+	<h1 id= "display"> </h1>
+	<!-- <h1 id= "display2"> </h1> -->
 	
 	<span class="blinker"></span>
 
-	<div id="text">
-	loading
-	</div>
+	<div id="text"> </div>
+	<div id="text2"> </div>
 	
 <script>
 $(document).ready(function(){
@@ -21,12 +21,18 @@ $(document).ready(function(){
   socket.on("displayrow", function(displayrow){
   	console.log(displayrow)
   	if (window.location.hash == "#apology") {
-  		
+
+
 	$("#text").html(displayrow.apology); 
+	$("#display").html("THE FORGIVENESS DATABANK•THE APOLOGY");
+
   	}
+
 else if (window.location.hash =="#forgiveness") {
-	h
-	$("#text").html(displayrow.forgiveness); 
+	  $("#text").hide();
+	
+	$("#text2").html(displayrow.forgiveness); 
+	$("#display").html("THE FORGIVENESS DATABANK•THE FORGIVENESS");
 }
   })
   });

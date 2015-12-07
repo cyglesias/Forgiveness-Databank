@@ -4,16 +4,38 @@
 h1 {
 	color:FFF;
 	font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
-	font-size: 74px;
+	font-size: 100px;
 	font-weight: 500;
 	line-height: 26.4px;
 	text-transform: uppercase;
 	text-align: center;
-	margin: 0px;
-	padding: 50px;
-
-
+	margin: 20px;
+	padding: 60px;
 }
+
+#display {
+  color:FFF;
+  font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
+  font-size: 70px;
+  font-weight: 500;
+  line-height: 26.4px;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0px;
+  padding: 50px;
+}
+
+/*#display2 {
+ color:FFF;
+  font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
+  font-size: 65px;
+  font-weight: 500;
+  line-height: 26.4px;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0px;
+  padding: 50px; 
+}*/
 
 /**{
   margin:auto;
@@ -152,9 +174,24 @@ time { font-size: 12px; color:rgba(white,.2); }*/
 
 #text {
   color: #fff;
-  margin-left: 20%;
-  margin-right: 20%;
+  margin-left: 9%;
+  margin-right: 9%;
   margin-bottom: 5%;
+  font-size: 35px;
+}
+
+#text2 {
+  color: #fff;
+  margin-top: 0px;
+  margin-left: 6%;
+  margin-right: 6%;
+  margin-bottom: 5%;
+  font-size: 35px;
+}
+
+#apologyprompt {
   
-  font-size: 30px;
+  padding-left: 36px;
+  padding-top: 5px;
+  padding-bottom: 20px;
 }
