@@ -17,7 +17,7 @@
     <fieldset>
       <div class="form_grp">
         <label>say sorry here</label>
-        <textarea id="message" placeholder="..." required></textarea>        
+        <textarea id="message" placeholder="..." required maxlength="1600"></textarea>        
       </div>
       <div class="form_grp">
       <button type="submit" id="send">submit for forgiveness</button>
@@ -32,12 +32,12 @@
 
 <div class="wrapper2">
 <div class="commentBoxfloat">
-  <form id="forgivenessform">
+  <form id="forgivenessform" maxlength="1600">
     <fieldset>
       <div class="form_grp">
         <label>To finish submitting your apology, you must write a letter of forgiveness to the apology below</label>
         <div id="apologyprompt"> </div>
-        <textarea id="message2" placeholder="..." required></textarea>        
+        <textarea id="message2" placeholder="..." required maxlength="1600"></textarea>        
       </div>
       <div class="form_grp">
       <button type="submit" id="send">submit forgiveness</button>
